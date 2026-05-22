@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamDisk - Player</title>
+    <title>StreamDisk - Watch Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -26,12 +26,12 @@
         </header>
 
         <div class="ad-slot">
-            <p class="text-gray-500 text-xs">BANNER AD (TOP)</p>
+            <p class="text-gray-500 text-xs">ADVERTISEMENT (Top)</p>
         </div>
 
         <div id="inputArea" class="bg-slate-800 p-6 rounded-2xl shadow-2xl border border-slate-700">
             <div class="flex flex-col gap-4">
-                <input type="text" id="videoLink" placeholder="YouTube या Video लिंक यहाँ डालें..." 
+                <input type="text" id="videoLink" placeholder="Paste Video Link Here..." 
                     class="w-full p-4 bg-slate-900 border border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none text-white">
                 
                 <button onclick="startStreaming()" class="w-full bg-gradient-to-r from-orange-500 to-red-600 p-4 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform">
@@ -41,14 +41,15 @@
         </div>
 
         <div id="midAd" class="ad-slot">
-            <p class="text-gray-500 text-xs">BANNER AD (MIDDLE)</p>
+            <p class="text-gray-500 text-xs">ADVERTISEMENT (Middle)</p>
         </div>
 
         <div id="playerSection" class="hidden mt-6 space-y-6">
             <div class="video-container shadow-2xl border-2 border-orange-500/50">
                 <iframe id="mainPlayer" src="" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div class="text-center">
+
+            <div class="flex flex-wrap gap-4 justify-center">
                 <button onclick="location.reload()" class="bg-slate-700 px-6 py-3 rounded-full font-semibold hover:bg-slate-600">
                     <i class="fas fa-redo mr-2"></i> Watch Another
                 </button>
@@ -60,7 +61,7 @@
         function startStreaming() {
             const rawLink = document.getElementById('videoLink').value.trim();
             if(!rawLink) { 
-                alert("कृपया लिंक डालें!");
+                alert("Please enter a link!");
                 return; 
             }
 
@@ -70,12 +71,9 @@
             } else if (rawLink.includes("youtu.be/")) {
                 let id = rawLink.split("/").pop();
                 finalLink = "https://www.youtube.com/embed/" + id;
-            } else if (rawLink.includes("drive.google.com")) {
-                finalLink = rawLink.replace("/view", "/preview");
             }
 
             document.getElementById('inputArea').classList.add('hidden');
-            document.getElementById('midAd').style.display = 'none'; 
             document.getElementById('playerSection').classList.remove('hidden');
             document.getElementById('mainPlayer').src = finalLink;
         }
